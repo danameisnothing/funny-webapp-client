@@ -1,6 +1,7 @@
-# myapp
+# funny-webapp-client
 
 A new Flutter project.
+Used as a project to learn the basics of Flutter.
 
 ## Getting Started
 
