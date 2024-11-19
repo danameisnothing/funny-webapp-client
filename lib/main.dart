@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,20 +20,11 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(), // TEMPORARY
         backgroundColor: Colors.green,
         drawer: Drawer(
+          backgroundColor: const Color.fromARGB(255, 23, 175, 170),
           child: ListView(
-            children: [
+            children: const [
               ListTile(
-                title: const Text("time"),
-                onTap: () async {
-                  await showDialog(
-                      context: context,
-                      builder: (BuildContext testCtx) {
-                        return const AlertDialog(
-                          title: Text("yeet"),
-                          content: Text("yeeghsabdjh\nhelp"),
-                        );
-                      });
-                },
+                title: Text("Settings"),
               ),
             ],
           ),
