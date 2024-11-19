@@ -1,35 +1,14 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'package:funny_webapp_client/routes/home.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+void main() => runApp(const App());
+
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      /*title: "test app title",*/
-      /*theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 173, 187, 146)),
-        useMaterial3: true,
-      ),*/
-      home: Scaffold(
-        appBar: AppBar(), // TEMPORARY
-        backgroundColor: Colors.green,
-        drawer: Drawer(
-          backgroundColor: const Color.fromARGB(255, 23, 175, 170),
-          child: ListView(
-            children: const [
-              ListTile(
-                title: Text("Settings"),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return const MaterialApp(home: Home());
   }
 }
