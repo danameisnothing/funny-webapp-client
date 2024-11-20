@@ -11,13 +11,9 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //leading: const BackButton(),
-        leading: const DrawerButton(
-          color: Colors.grey,
-        ),
+        leading: const DrawerButton(),
       ),
-      backgroundColor: Colors.green,
       drawer: Drawer(
-        backgroundColor: const Color.fromARGB(255, 23, 175, 170),
         child: ListView(
           children: [
             ListTile(

@@ -5,6 +5,13 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text("Settings"),
+      ),
+    );
   }
 }
