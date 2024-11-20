@@ -10,7 +10,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //leading: const BackButton(),
         leading: const DrawerButton(),
       ),
       drawer: Drawer(
