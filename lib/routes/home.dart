@@ -4,7 +4,8 @@ import 'package:funny_webapp_client/routes/settings.dart';
 
 // FIXME: are you sure this is a StatelessWidget?
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final VoidCallback updateGlobalTheme;
+  const Home(this.updateGlobalTheme, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,10 @@ class Home extends StatelessWidget {
             ListTile(
               title: const Text("Settings"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const Settings()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => Settings(updateGlobalTheme)));
               },
             ),
           ],

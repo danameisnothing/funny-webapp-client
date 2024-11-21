@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:funny_webapp_client/settings/runtime_app_settings.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({super.key});
+  final VoidCallback updateGlobalTheme;
+  const Settings(this.updateGlobalTheme, {super.key});
 
   @override
   State<Settings> createState() => _Settings();
+
+  void commitUpdate() async {
+    await runtimeAppSettings.savePreferences();
+    updateGlobalTheme();
+  }
 }
 
 class _Settings extends State<Settings> {
@@ -23,12 +29,12 @@ class _Settings extends State<Settings> {
         padding: EdgeInsets.zero,
         children: [
           SwitchListTile(
-            title: const Text("yeet"),
+            title: const Text("Dark Mode"),
             value: runtimeAppSettings.isDarkMode,
             onChanged: (value) async {
               setState(() => runtimeAppSettings.isDarkMode =
                   !runtimeAppSettings.isDarkMode);
-              await runtimeAppSettings.savePreferences();
+              widget.commitUpdate();
             },
           ),
           Divider(
@@ -41,7 +47,7 @@ class _Settings extends State<Settings> {
                   context: context,
                   builder: (BuildContext ctx) {
                     return AlertDialog(
-                      title: const Text("Confirm"),
+                      title: const Text("Reset preferences"),
                       content: const Text("r u sure?"),
                       actions: [
                         TextButton(
@@ -51,7 +57,7 @@ class _Settings extends State<Settings> {
                             onPressed: () async {
                               Navigator.pop(ctx);
                               await runtimeAppSettings.reset();
-                              setState(() => runtimeAppSettings);
+                              widget.commitUpdate();
                             },
                             child: const Text("Reset"))
                       ],
