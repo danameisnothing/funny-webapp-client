@@ -3,24 +3,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 final runtimeAppSettings = RuntimeAppSettings();
 
 class RuntimeAppSettings {
-  bool isDarkMode;
-  SharedPreferences? _pref;
-
-  RuntimeAppSettings() : isDarkMode = false {
-    _pref = null;
-  }
+  late bool isDarkMode;
+  late SharedPreferences _pref;
 
   Future initAndLoadFromPreference() async {
     _pref = await SharedPreferences.getInstance();
 
-    isDarkMode = _pref!.getBool("isDarkMode") ?? false;
+    isDarkMode = _pref.getBool("isDarkMode") ?? false;
   }
 
   Future savePreferences() async {
-    if (_pref == null) {
-      throw Exception("Object has not been properly initialized yet");
-    }
+    await _pref.setBool("isDarkMode", isDarkMode);
+  }
 
-    await _pref!.setBool("isDarkMode", isDarkMode);
+  Future reset() async {
+    await _pref.clear();
+
+    await initAndLoadFromPreference();
   }
 }

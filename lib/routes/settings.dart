@@ -10,7 +10,6 @@ class Settings extends StatefulWidget {
 }
 
 class _Settings extends State<Settings> {
-  // TODO: ADD A RESET BUTTON
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +26,39 @@ class _Settings extends State<Settings> {
             title: const Text("yeet"),
             value: runtimeAppSettings.isDarkMode,
             onChanged: (value) async {
-              // FIXME: IS THIS SAFE?
               setState(() => runtimeAppSettings.isDarkMode =
                   !runtimeAppSettings.isDarkMode);
               await runtimeAppSettings.savePreferences();
             },
           ),
+          Divider(
+            height: 1.0,
+          ),
+          ListTile(
+            title: const Text("Reset preferences"),
+            onTap: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext ctx) {
+                    return AlertDialog(
+                      title: const Text("Confirm"),
+                      content: const Text("r u sure?"),
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: const Text("Cancel")),
+                        TextButton(
+                            onPressed: () async {
+                              Navigator.pop(ctx);
+                              await runtimeAppSettings.reset();
+                              setState(() => runtimeAppSettings);
+                            },
+                            child: const Text("Reset"))
+                      ],
+                    );
+                  });
+            },
+          )
         ],
       ),
     );
